@@ -202,6 +202,8 @@ natural language, recognizing patterns, and making decisions.
 
 # Infrastructure Implications
 
+   {{fig2}} Compute Estimates
+
 Compute Estimates: Narrative Versioning
 
 +-----------------------------------------------------------+
@@ -241,6 +243,8 @@ Compute Estimates: Non-Graphical
 | 250,000 users  | 250 nodes  |
 | 1,000,000 users| 1,000 nodes|
 +----------------+------------+
+
+{: #fig1 title="Figure 2: Compute Estimates" artwork-align="center"}
 
 Bandwidth Requirements: User
 
