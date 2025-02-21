@@ -355,6 +355,9 @@ Distribution of OBM processing tasks between central cloud servers and edge comp
 
 # Privacy and Security in Flexible Media
 
+Ensuring privacy and user confidentiality in OBM requires careful management of compute-related and object (asset) information. Exposing details about compute and asset resources to the network may inadvertently reveal sensitive application or domain-level data. To mitigate this risk, strategies for protecting sensitive information should be incorporated into OBM traffic steering mechanisms. An approach might be to anonymise or abstract key identifiers, preventing direct exposure of device identities or application-specific details. This could involve using generic identifiers, such as service-level indicators, instead of detailed resource specifications. Additionally, customisable information exposure policies can be applied, allowing different levels of detail to be shared based on application or network scheduling requirements.
+
+While ensuring anonymity, it is also necessary to maintain the utility of compute-aware traffic steering. The challenge lies in striking a balance between protecting confidentiality and providing sufficient information for effective resource allocation. Techniques such as secure aggregation, differential privacy, and encryption-based mechanisms may help achieve this balance, ensuring that traffic steering decisions are both privacy-preserving and optimised for performance.
 
 ## Data Protection Challenges
 
