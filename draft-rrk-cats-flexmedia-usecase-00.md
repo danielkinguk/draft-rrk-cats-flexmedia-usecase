@@ -139,22 +139,6 @@ To support OBM delivery, compute-aware traffic steering must fulfil several requ
 
 ## Latency Reduction Techniques
 
-
-## Content Personalisation Algorithms
-
-
-## Metrics
-
-
-### Flex Media Metrics
-
-
-### Compute Metrics
-
-
-### Network Metrics
-
-
 # Architecture for Flex Media
 
 
@@ -251,7 +235,7 @@ To support OBM delivery, compute-aware traffic steering must fulfil several requ
 {: #fig1 title="Figure 1: AI4ME Network Architecture" artwork-align="center"}
 
 
-# Infrastructure Implications
+# Compute and Network Estimates
 
    {{fig2}} Compute Estimates
 
@@ -315,35 +299,36 @@ Bandwidth Requirements: User
 +------------------------------------------------------------------------------------------------------------------------------------+
 ~~~~
 
-
-## Scalability Considerations
-
-
-### Content Delivery Networks (CDNs)
+# Metrics
 
 
-### Server-Side Processing
+## Flex Media Metrics
 
 
-### Storage Requirements
+## Compute Metrics
 
 
-### Client-Side Capabilities
+## Network Metrics
+
+# Scalability Considerations
 
 
-### Metadata Management
+## Content Delivery Networks (CDNs)
 
 
-### Quality of Service (QoS) and Quality of Experience (QoE)
+## Server-Side Processing
 
 
-## Role and Adaptation of Content Delivery Networks (CDNs)
+## Storage Requirements
 
 
-## Edge Computing in Media Delivery
+## Client-Side Capabilities
 
 
-## Additional Desirable Capabilities
+## Metadata Management
+
+
+## Quality of Service (QoS) and Quality of Experience (QoE)
 
 
 # Privacy and Security in Flexible Media
