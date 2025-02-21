@@ -343,23 +343,22 @@ TBD
 
 Addressing these scalability concerns requires innovative solutions in content distribution architectures, such as more intelligent edge computing frameworks, advanced caching strategies, more efficient encoding techniques, and the development of new standards and protocols designed to support the dynamic nature of object-based media. Additionally, leveraging advancements in network infrastructure, such as 5G and beyond, can provide the high bandwidth and low latency needed to deliver personalised, interactive media experiences to large audiences.
 
-## Content Delivery Networks (CDNs)
-
-
 ## Server-Side Processing
 
+The dynamic assembly of media objects based on user preferences, context, or device capabilities can impose significant processing loads on servers, especially for live or real-time content. Scalability challenges arise in efficiently managing these computational demands, particularly when serving a large and concurrent user base.
+
+## Client-Side Processing
+
+The variability in client devices (ranging from smart TVs and set-top boxes to smartphones and tablets) poses challenges in ensuring a consistent and seamless user experience. Scalability issues may arise from the need to adapt real-time content to each device's capabilities, considering factors such as processing power, screen size, and available bandwidth.
 
 ## Storage Requirements
-
-
-## Client-Side Capabilities
-
 
 ## Metadata Management
 
 
 ## Quality of Service (QoS) and Quality of Experience (QoE)
 
+Maintaining high QoS and QoE levels as the user base scales is critical. This includes challenges related to minimising buffering, ensuring synchronisation between media objects (e.g., audio tracks with video), and adapting to varying network conditions in real time.
 
 # Privacy and Security in Flexible Media
 
