@@ -115,7 +115,7 @@ TBA
 
 # Deploying Flexible Media Services
 
-Unlike traditional media formats, OBM treats media elements as independent objects that can be orchestrated at runtime. This document outlines the use cases and requirements for OBM, emphasising the role of the IETF Compute-Aware Traffic Steering (CATS) initiative in optimising the delivery of OBM content. Key components of OBM include:
+It is important to optimise network traffic in OBM environments where computing resources are distributed across multiple locationss. This involves making the network aware of the computational context: where computing resources are located, their capabilities, and their current load or availability. By understanding these factors, the network can make more informed decisions about where to route data and processing tasks, aiming to improve efficiency, reduce latency, and enhance the overall performance of networked applications and services. Unlike traditional media formats, OBM treats media elements as independent objects that can be orchestrated at runtime. This document outlines the use cases and requirements for OBM, emphasising the possible role of the IETF Compute-Aware Traffic Steering (CATS) initiative in optimising the delivery of OBM content. Key components of OBM include:
 
 * Media Objects:
 Discrete elements such as video segments, audio layers, and metadata.
