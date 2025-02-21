@@ -65,19 +65,19 @@ FM Content may be stored using Content Delivery Networks (CDNs), which are desig
 The following terms are used in this document:
 
 * AI: 
-: Artificial Intelligence aims to create systems capable of performing tasks that typically require human intelligence, such as understanding natural language, recognizing patterns, and making decisions.
+Artificial Intelligence aims to create systems capable of performing tasks that typically require human intelligence, such as understanding natural language, recognizing patterns, and making decisions.
 
 * Clients: 
-: Media playback applications are designed to request and ingest flexible media content.
+Media playback applications are designed to request and ingest flexible media content.
 
 * Objects: 
-: Assets that are used to make a piece of content.
+Assets that are used to make a piece of content.
 
 * Scheduler:
-* : Instantiates executors for jobs at a local controller based on the resources available at the compute site where the system resides.
+Instantiates executors for jobs at a local controller based on the resources available at the compute site where the system resides.
 
 * Service: 
-: A media stream of user-generated personalised content.
+A media stream of user-generated personalised content.
 
 # Significance of Flexible Media and Internet Usage
 
