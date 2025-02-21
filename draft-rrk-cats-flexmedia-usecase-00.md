@@ -49,7 +49,14 @@ This document outlines the challenges and use cases for deploying and operating 
 
 # Introduction
 
-Technical Overview of Flexible Media
+Traditional media broadcasts, in both radio and video, broadcast a packaged, edited, single linear stream of information to all users regardless of playback device or environmental factors. Object-based media represents a significant shift from traditional media production and broadcasting methods, focusing instead on creating, storing, and transmitting media as a collection of discrete objects (such as audio, video, or text elements) rather than a single, unchangeable stream. This approach allows for media to be more interactive, adaptable, and personalised to individual viewers or listening environments, offering several advantages for the future of television and other media experiences.
+
+Flexible Media (FM), or Object-based (OBM) media, enables content to be tailored to individual preferences or requirements. For instance, a viewer could adjust the level of background music in a program, switch between different camera angles, or select which storyline to follow in a complex narrative. This level of personalisation enhances viewer engagement and satisfaction. It can greatly improve accessibility features for diverse audiences. For example, audio descriptions for the visually impaired or sign language for the deaf can be seamlessly integrated and toggled on or off according to the viewer's needs. This inclusivity broadens the potential audience for content.
+
+It is important to use Internet bandwidth, especially at scale, efficiently; broadcasters can use bandwidth more efficiently by transmitting only the objects necessary for a particular viewer's experience. This is particularly beneficial in environments with constrained bandwidth or users with limited data plans. FM media can be designed to be compatible across various devices and screen sizes, ensuring a consistent user experience whether the content is viewed on a smartphone, tablet, or large television screen. This scalability is crucial to the variety of devices and screens. 
+
+FM Content may be stored using Content Delivery Networks (CDNs), which are designed to efficiently distribute digital content—such as multimedia files and live streams—over IP networks to numerous endpoints and viewers. Typically, a CDN includes one or more servers responsible for delivering digital objects or streams. Additionally, it features a management or control system that handles various operations such as content distribution, request routing, reporting, metadata management, and other functionalities essential for the system's performance.
+
 
 # Conventions and Definitions
 
@@ -58,11 +65,23 @@ Technical Overview of Flexible Media
 The following terms are used in this document:
 
 * AI: 
-: Artificial Intelligence aims to create systems capable of performing
-tasks that typically require human intelligence, such as understanding
-natural language, recognizing patterns, and making decisions.
+: Artificial Intelligence aims to create systems capable of performing tasks that typically require human intelligence, such as understanding natural language, recognizing patterns, and making decisions.
+
+* Clients: 
+: Media playback applications are designed to request and ingest flexible media content.
+
+* Objects: 
+: Assets that are used to make a piece of content.
+
+* Scheduler:
+* : Instantiates executors for jobs at a local controller based on the resources available at the compute site where the system resides.
+
+* Service: 
+: A media stream of user-generated personalised content.
 
 # Significance of Flexible Media and Internet Usage
+
+A Flex Media (FM) service is personalised media such as stories, audiobooks, and games. This content is generated based on user preferences and experiential learning, ensuring a tailored experience. It employs multi-directional delivery methods, allowing user-generated content and personalised media to thrive. This "software-powered content" caters to end-users, the primary recipients and participants in this dynamic ecosystem.
 
 
 # Objectives of the Analysis
