@@ -115,6 +115,18 @@ TBA
 
 # Deploying Flexible Media Services
 
+Unlike traditional media formats, OBM treats media elements as independent objects that can be orchestrated at runtime. This document outlines the use cases and requirements for OBM, emphasising the role of the IETF Compute-Aware Traffic Steering (CATS) initiative in optimising the delivery of OBM content. Key components of OBM include:
+
+* Media Objects:
+Discrete elements such as video segments, audio layers, and metadata.
+
+* Orchestration Engine:
+Determines how objects are assembled based on contextual factors.
+
+* Delivery Mechanisms:
+Network protocols and architectures enabling object transport and synchronisation.
+
+The dynamic nature of OBM necessitates advanced traffic steering mechanisms that can adapt to compute and network constraints in real-time.
 
 ## Compute Aware Traffic Steering
 
