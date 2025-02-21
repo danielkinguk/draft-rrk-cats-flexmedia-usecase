@@ -70,6 +70,12 @@ Artificial Intelligence aims to create systems capable of performing tasks that 
 * Clients: 
 Media playback applications are designed to request and ingest flexible media content.
 
+* Edge Computing:
+Edge computing is a computing pattern that moves computing infrastructures, i.e, servers, away from centralized data centers and instead places it close to the end users for low latency communication.
+
+* Network Edge:
+The network edge is an architectural demarcation point used to identify physical locations where the corporate network connects to third-party networks.
+
 * Objects: 
 Assets that are used to make a piece of content.
 
@@ -78,6 +84,9 @@ Instantiates executors for jobs at a local controller based on the resources ava
 
 * Service: 
 A media stream of user-generated personalised content.
+
+* Service identifier:
+An identifier representing a service, which the clients use to access it.
 
 # Significance of Flexible Media and Internet Usage
 
