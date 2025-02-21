@@ -334,6 +334,14 @@ Distribution of OBM processing tasks between central cloud servers and edge comp
 
 # Scalability Considerations
 
+Scalability concerns for OBM distribution at scale are significant due to the inherently complex and dynamic nature of delivering personalised, interactive content to a wide audience. These concerns primarily revolve around the following aspects:
+
+* Network Bandwidth: Object-based media, by its nature, can require more data transmission than traditional linear media because it involves sending multiple media objects (and potentially multiple versions of each object) to allow for user customisation and interactivity. This can lead to increased bandwidth demands, particularly during peak usage times, posing challenges for content delivery networks (CDNs) and end-user internet connections.
+
+* Compute Resource Usuage:
+TBD
+
+Addressing these scalability concerns requires innovative solutions in content distribution architectures, such as more intelligent edge computing frameworks, advanced caching strategies, more efficient encoding techniques, and the development of new standards and protocols designed to support the dynamic nature of object-based media. Additionally, leveraging advancements in network infrastructure, such as 5G and beyond, can provide the high bandwidth and low latency needed to deliver personalised, interactive media experiences to large audiences.
 
 ## Content Delivery Networks (CDNs)
 
