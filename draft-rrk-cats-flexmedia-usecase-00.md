@@ -301,6 +301,28 @@ Bandwidth Requirements: User
 
 # Metrics
 
+In traditional routing systems, often network path costs may not change frequently unless there is a resource failure or planned outage, whereas network traffic engineering metrics, such as available bandwidth, may fluctuate more dynamically. However, the computation-oriented metrics relevant to OBM can be highly variable, influenced by factors such as session numbers, CPU and GPU utilisation, and memory consumption. Determining the appropriate interval or triggering events for distributing this information is critical, as overly frequent updates may cause unnecessary signalling overhead.
+
+OBM requires the ability to dynamically assess compute availability and adjust media object delivery accordingly. Depending on the decision logic associated with OBM service delivery, one or more compute-related metrics must be conveyed within a CATS domain. The frequency of such conveyance must be optimised to ensure that signalling overhead does not introduce additional network congestion. While existing routing protocols can provide a baseline for conveying such metrics, alternative mechanisms may be required to efficiently integrate compute-aware decision-making processes.
+
+Furthermore, an effective OBM system should balance network path selection with the real-time availability of compute resources to ensure optimal QoE. This may involve leveraging distributed compute resources across the network, allowing OBM elements to be processed closer to the user when necessary. Mechanisms for synchronising compute-aware decisions across different network segments will be crucial to ensuring seamless media composition and delivery.
+
+The categories of metrics relevant to OBM in a compute-aware traffic steering context include:
+
+* Compute and GPU Resource Availability:
+CPU and GPU utilisation, memory consumption, and storage capacity at different compute nodes.
+
+* Session and User Load:
+Number of concurrent media sessions, user distribution, and geographic density of active users.
+
+* Processing Latency
+Delays introduced by encoding, decoding, and media object composition at various compute locations.
+
+* Network Throughput and Congestion:
+Available bandwidth, packet loss, and jitter affecting media object transmission.
+
+* Edge and Cloud Resource Allocation:
+Distribution of OBM processing tasks between central cloud servers and edge computing nodes to balance performance and latency.
 
 ## Flex Media Metrics
 
