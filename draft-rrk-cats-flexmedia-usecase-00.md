@@ -83,18 +83,26 @@ A media stream of user-generated personalised content.
 
 A Flex Media (FM) service is personalised media such as stories, audiobooks, and games. This content is generated based on user preferences and experiential learning, ensuring a tailored experience. It employs multi-directional delivery methods, allowing user-generated content and personalised media to thrive. This "software-powered content" caters to end-users, the primary recipients and participants in this dynamic ecosystem.
 
-
-# Objectives of the Analysis
-
-
-# Background and Related Work
-
-
-## Evolution of Digital Media Streaming over the Internet
-
+From a network distribution perspective, FM media requires a robust and flexible delivery infrastructure capable of handling the dynamic assembly of content based on user interactions and preferences. This necessitates advanced content delivery networks (CDNs) and edge computing solutions that efficiently process and deliver personalised content streams. Moreover, the scalability of this approach is critical, as it must support a potentially vast number of unique user experiences generated from the same set of media objects. By separating media components, creators can offer multiple versions of content tailored to different needs, such as alternative audio tracks for different languages or visually impaired audiences requiring descriptive audio. This level of adaptability not only enhances the user experience but also broadens the audience's reach.
 
 ## Previous IETF work on Video Media Delivery across Internet Infrastructure
 
+The Internet Engineering Task Force (IETF) has been involved in numerous initiatives and has developed various standards and protocols to improve and facilitate video media delivery across Internet infrastructure. 
+
+* Real-Time Streaming Protocol (RTSP):
+Defined in {::RFC2326}, RTSP controls streaming media servers. RTSP is designed to control media sessions between endpoints and acts as a network remote control for multimedia servers.
+
+* Real-time Transport Protocol (RTP): 
+Specified in {::RFC3550}, RTP delivers audio and video over IP networks. It is widely used in streaming media systems, video conferencing, and push-to-talk features (VoIP).
+
+* RTP Control Protocol (RTCP):
+Defined alongside RTP in {::RFC3550}, RTCP provides out-of-band statistics and control information for an RTP flow. It monitors transmission statistics and quality of service (QoS) and aids in synchronisation between different streams.
+
+* HTTP Live Streaming (HLS):
+While initially developed by Apple and not originally an IETF standard, HLS has become widely adopted for online streaming live and on-demand video content. The IETF has documents that discuss HLS within the context of internet infrastructure, such as {::RFC8216}.
+
+* Media Over QUIC (MoQ):
+TBA
 
 # Deploying Flexible Media Services
 
