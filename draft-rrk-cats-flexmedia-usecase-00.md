@@ -299,7 +299,7 @@ Compute Estimates: Non-Graphical
 {: #fig3 title="Figure 3: Compute Estimates per Flex Media Service Type" artwork-align="center"}
 
 
-{{fig4} Bandwidth Estimates per Flex Media Service Type
+{{fig4}} Bandwidth Estimates per Flex Media Service Type
 
 ~~~~
 Bandwidth Requirements: User
