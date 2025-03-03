@@ -152,26 +152,26 @@ TBA
 ~~~~
                   ((Users))
                       |
-   +------------------+------------------+
-   |     BBC Flex Media Orchestrator     |
-   |  +------------------------------+   |
-   |  |  Object Media Queue Manager  |   |
-   |  | +--------------------------+ |   |
-   |  | | Personalised Media Queue | |   |
-   |  | +--------------------------+ |   |
-   |  | | Personalised Media Queue | |   |
-   |  | +--------------------------+ |   |
-   |  | | Personalised Media Queue | |   |
-   |  | +--------------------------+ |   |
-   |  | | Personalised Media Queue | |   |
-   |  | +--------------------------+ |   |
-   |  +------------------------------+   |
-   |          |                |         |
-   |  +--------------+  +--------------+ |
-   |  | Job Scheduler|  | Job Scheduler| |
-   |  | Compute Alloc|  | Compute Alloc| |
-   |  +--------------+  +--------------+ |
-   +-------------------------------------+
+   +------------------+-----------------+
+   |     BBC Flex Media Orchestrator    |
+   |  +------------------------------+  |
+   |  |  Object Media Queue Manager  |  |
+   |  | +--------------------------+ |  |
+   |  | | Personalised Media Queue | |  |
+   |  | +--------------------------+ |  |
+   |  | | Personalised Media Queue | |  |
+   |  | +--------------------------+ |  |
+   |  | | Personalised Media Queue | |  |
+   |  | +--------------------------+ |  |
+   |  | | Personalised Media Queue | |  |
+   |  | +--------------------------+ |  |
+   |  +------------------------------+  |
+   |          |                |        |
+   |  +-------------+   +-------------+ |
+   |  |Job Scheduler|   |Job Scheduler| |
+   |  |Compute Alloc|   |Compute Alloc| |
+   |  +-------------+   +-------------+ |
+   +------------------------------------+
              |               |
              v               v
      +-----------------------------+
@@ -268,23 +268,23 @@ Compute Estimates: Narrative Versioning
 
 Compute Estimates: Layered Compositing
 
-+-----------------------------------------------------------+
-|Number of Users | Worst Case  | Best Case (90% Cache Hits) |
-+----------------+------------+-----------------------------+
-| 10,000 users   | 111 nodes  |  84 nodes                   |
-| 250,000 users  | 2,775 nodes| 2,082 nodes                 |
-| 1,000,000 users|11,100 nodes| 8,325 nodes                 |
-+----------------+------------+-----------------------------+
++------------------------------------------------------------+
+|Number of Users | Worst Case  | Best Case (90% Cache Hits)  |
++----------------+-------------+-----------------------------+
+| 10,000 users   | 111 nodes   | 84 nodes                    |
+| 250,000 users  | 2,775 nodes | 2,082 nodes                 |
+| 1,000,000 users| 11,100 nodes| 8,325 nodes                 |
++----------------+-------------+-----------------------------+
 
 Compute Estimates: Rendered Objects
 
-+-----------------------------------------------------------+
-|Number of Users | Worst Case  | Best Case (90% Cache Hits) |
-+----------------+------------+-----------------------------+
-| 10,000 users   | 138 nodes  | 104 nodes                   |
-| 250,000 users  | 3,450 nodes| 2,600 nodes                 |
-| 1,000,000 users|13,800 nodes|10,400 nodes                 |
-+----------------+------------+-----------------------------+
++------------------------------------------------------------+
+|Number of Users | Worst Case  | Best Case (90% Cache Hits)  |
++----------------+-------------+-----------------------------+
+| 10,000 users   | 138 nodes   | 104 nodes                   |
+| 250,000 users  | 3,450 nodes | 2,600 nodes                 |
+| 1,000,000 users| 13,800 nodes| 10,400 nodes                |
++----------------+-------------+-----------------------------+
 
 Compute Estimates: Non-Graphical
 
@@ -320,7 +320,6 @@ Bandwidth Requirements: User
 ~~~~
 
 {: #fig3 title="Figure 4: Bandwidth Estimates per Flex Media Service Type" artwork-align="center"}
-
 
 # Metrics
 
@@ -368,7 +367,6 @@ This includes metrics associated with video delivery and media experience respon
   * Encode Delay: time taken to encode and package frames for streaming. This depends on encoder type (hardware or software), encoding type (some are more optimised for low-latency) and media segment length.
   
   * Transport Delay: the network propagation delay for a media frame; depends on Frame Size and network bandwith
-  
 
 2. Client QoE
 
@@ -388,7 +386,6 @@ These metrics concern the consumption of flex media and the perception of degrad
   
 * Playback Rate: the rates at which different objects are played at the point of assembly and presentation. These can vary if local playback adaptation algorithms are used to overcome object asynchrony. 
 
-
 3. Cost
 These metrics refer to the cost of running offloaded media processing jobs at a selected compute site and streaming the results back to the client.
 
@@ -396,11 +393,9 @@ These metrics refer to the cost of running offloaded media processing jobs at a 
 
 * Cache Recency: this specifies the (caching policy) i.e. the priority to be set for keeping a generated object frame in a cache . Utilisation of a cache reduces compute resource utilisation. An object with higher Cache Recency indicates a higher probability that this object will be required by another client in the lifetime of the experience.
 
-
 ## Compute Metrics
 
 These metrics are used to assess the suitability of compute resources and their availability for offloading of flex media compute tasks. They denote different types of compute hardware as well as their level of utilisation. GPUs will run tasks such as rendering complex images, where NPUs are preferred for repetitive and less complex AI tasks, such as background blurring or object detection.
-
 
 * Compute Type:  Type of processor (CPU, GPU, Frequency, FLOPS, integer, FP8, 4 octets)
 
@@ -427,8 +422,6 @@ These metrics enable the assessment the suitability ot network links based on th
 *	Throughput: The actual data transfer rate achieved can be lower than the available bandwidth due to various factors like congestion.
 *	Error Rates: The rate of erroneous packets, indicating the quality of the network link.
 
-
-
 # Scalability Considerations
 
 Scalability concerns for OBM distribution at scale are significant due to the inherently complex and dynamic nature of delivering personalised, interactive content to a wide audience. These concerns primarily revolve around the following aspects:
@@ -436,7 +429,8 @@ Scalability concerns for OBM distribution at scale are significant due to the in
 * Network Bandwidth: Object-based media, by its nature, can require more data transmission than traditional linear media because it involves sending multiple media objects (and potentially multiple versions of each object) to allow for user customisation and interactivity. This can lead to increased bandwidth demands, particularly during peak usage times, posing challenges for content delivery networks (CDNs) and end-user internet connections.
 
 * Compute Resource Usuage:
-TBD
+  
+To be discussed in later versions of this document. 
 
 Addressing these scalability concerns requires innovative solutions in content distribution architectures, such as more intelligent edge computing frameworks, advanced caching strategies, more efficient encoding techniques, and the development of new standards and protocols designed to support the dynamic nature of object-based media. Additionally, leveraging advancements in network infrastructure, such as 5G and beyond, can provide the high bandwidth and low latency needed to deliver personalised, interactive media experiences to large audiences.
 
@@ -450,8 +444,11 @@ The variability in client devices (ranging from smart TVs and set-top boxes to s
 
 ## Storage Requirements
 
+To be discussed in later versions of this document. 
+
 ## Metadata Management
 
+To be discussed in later versions of this document. 
 
 ## Quality of Service (QoS) and Quality of Experience (QoE)
 
