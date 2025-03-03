@@ -97,28 +97,6 @@ From a network distribution perspective, FM media requires a robust and flexible
 
 Personalisation of media can occur in multiple stages if regional and personal preferences are considered. Delivery infrastructures for personalised media need therefore offer flexibility in creating dynamic media composition stages at at various locations in the network to efficiently support the various personalisation permutations. Further, the selection of media composition sites depends on the availability of compute resources, proximity to storage for media objects and if user agency is afforded, round-trip times to the destination Client.     
 
-
-
-
-## Previous IETF work on Video Media Delivery across Internet Infrastructure
-
-The Internet Engineering Task Force (IETF) has been involved in numerous initiatives and has developed various standards and protocols to improve and facilitate video media delivery across Internet infrastructure. 
-
-* Real-Time Streaming Protocol (RTSP):
-Defined in {::RFC2326}, RTSP controls streaming media servers. RTSP is designed to control media sessions between endpoints and acts as a network remote control for multimedia servers.
-
-* Real-time Transport Protocol (RTP): 
-Specified in {::RFC3550}, RTP delivers audio and video over IP networks. It is widely used in streaming media systems, video conferencing, and push-to-talk features (VoIP).
-
-* RTP Control Protocol (RTCP):
-Defined alongside RTP in {::RFC3550}, RTCP provides out-of-band statistics and control information for an RTP flow. It monitors transmission statistics and quality of service (QoS) and aids in synchronisation between different streams.
-
-* HTTP Live Streaming (HLS):
-While initially developed by Apple and not originally an IETF standard, HLS has become widely adopted for online streaming live and on-demand video content. The IETF has documents that discuss HLS within the context of internet infrastructure, such as {::RFC8216}.
-
-* Media Over QUIC (MoQ):
-TBA
-
 # Deploying Flexible Media Services
 
 It is important to optimise network traffic in OBM environments where computing resources are distributed across multiple locationss. This involves making the network aware of the computational context: where computing resources are located, their capabilities, and their current load or availability. By understanding these factors, the network can make more informed decisions about where to route data and processing tasks, aiming to improve efficiency, reduce latency, and enhance the overall performance of networked applications and services. Unlike traditional media formats, OBM treats media elements as independent objects that can be orchestrated at runtime. This document outlines the use cases and requirements for OBM, emphasising the possible role of the IETF Compute-Aware Traffic Steering (CATS) initiative in optimising the delivery of OBM content. Key components of OBM include:
@@ -142,16 +120,39 @@ To support OBM delivery, compute-aware traffic steering must fulfil several requ
 
 ## Bandwidth Optimisation Strategies
 
+To be discussed in future versions of this document. 
 
 ## Latency Reduction Techniques
 
+To be discussed in future versions of this document. 
+
+## Previous IETF work on Video Media Delivery across Internet Infrastructure
+
+The Internet Engineering Task Force (IETF) has been involved in numerous initiatives and has developed various standards and protocols to improve and facilitate video media delivery across Internet infrastructure. 
+
+* Real-Time Streaming Protocol (RTSP):
+Defined in {::RFC2326}, RTSP controls streaming media servers. RTSP is designed to control media sessions between endpoints and acts as a network remote control for multimedia servers.
+
+* Real-time Transport Protocol (RTP): 
+Specified in {::RFC3550}, RTP delivers audio and video over IP networks. It is widely used in streaming media systems, video conferencing, and push-to-talk features (VoIP).
+
+* RTP Control Protocol (RTCP):
+Defined alongside RTP in {::RFC3550}, RTCP provides out-of-band statistics and control information for an RTP flow. It monitors transmission statistics and quality of service (QoS) and aids in synchronisation between different streams.
+
+* HTTP Live Streaming (HLS):
+While initially developed by Apple and not originally an IETF standard, HLS has become widely adopted for online streaming live and on-demand video content. The IETF has documents that discuss HLS within the context of internet infrastructure, such as {::RFC8216}.
+
+* Media Over QUIC (MoQ):
+TBA
+
 # Architecture for Flex Media
 
-
-   {{fig1}} AI4ME Network Architecture
+   {{fig1}} Flex Media Architecture
 
 ~~~~
-   +-------------------------------------+
+                  ((Users))
+                      |
+   +------------------+------------------+
    |     BBC Flex Media Orchestrator     |
    |  +------------------------------+   |
    |  |  Object Media Queue Manager  |   |
@@ -171,47 +172,52 @@ To support OBM delivery, compute-aware traffic steering must fulfil several requ
    |  | Compute Alloc|  | Compute Alloc| |
    |  +--------------+  +--------------+ |
    +-------------------------------------+
-           |               |
-           v               v
-   +-----------------------------+
-   |  Compute & Object Resource  |
-   |  +-----------------------+  |
-   |  | Distributed Compute   |  |
-   |  |  Grid (Nodes/Jobs)    |  |
-   |  +-----------------------+  |
-   +-----------------------------+
-            |
-            v
-   +-----------------------------+
-   |   Network Orchestrator      |
-   |  +-----------------------+  |
-   |  |     Core Network      |  |
-   |  |  (Cloud & Telecom)    |  |
-   |  +-----------------------+  |
-   |      |       |      |       |
-   |  +------+ +------+ +------+ |
-   |  | Metro| | Metro| | Metro| |
-   |  +------+ +------+ +------+ |
-   |      |       |      |       |
-   |  +--------+  +--------+     |
-   |  |  Users |  | Devices|     |
-   |  +--------+  +--------+     |
-   +-----------------------------+
+             |               |
+             v               v
+     +-----------------------------+
+     |  Compute & Object Allocator |
+     |  +-----------------------+  |
+     |  | Distributed Compute   |  |
+     |  |  Grid (Nodes/Jobs)    |  |
+     |  +-----------------------+  |
+     +-----------------------------+
+                    |
+                    v
+     +-----------------------------+
+     |   Network Orchestrator      |
+     |  +-----------------------+  |
+     |  |     Core Network      |  |
+     |  |  (Cloud & Telecom)    |  |
+     |  +-----------------------+  |
+     |      |       |      |       |
+     |  +------+ +------+ +------+ |
+     |  | Metro| | Metro| | Metro| |
+     |  +------+ +------+ +------+ |
+     |      |       |      |       |
+     |  +--------+  +--------+     |
+     |  |  Users |  | Devices|     |
+     |  +--------+  +--------+     |
+     +-----------------------------+
 
+{: #fig1 title="Figure 1: Flex Media Architecture" artwork-align="center"}
+
+The above figure provides a conceptulized architecture for Object-Based Media (OBM) processing and delivery, where media objects are dynamically assembled and personalized for individual users. Unlike traditional media streaming, which delivers a pre-encoded linear stream, OBM decomposes content into discrete media objects such as video segments, audio tracks, subtitles, and metadata. These objects are retrieved, processed, and compiled dynamically based on user preferences, user device capabilities (or distributed and dedicated compute nodes), and network conditions.
+
+   {{fig2}} Flex Media Functional Components
 
                                      +-------------------------------+
                                      |   BBC Flex Media Orchestrator |
                                      |  +-------------------------+  |
                                      |  | Policy Decision         |  |
-                                     |  | Site Manager            |  |
-                                     |  | Site Observer (Cloud)   |  |
-                                     |  +-------------------------+  |
-                                     +-------------------------------+
-                                                               |
-                                                               |
-+----------------+       +-----+       +----------------+      |
-|     Client     |------>| CDN |<----->|    Storage     |      |
-+----------------+       +-----+       +----------------+      |
+       +-----------------------------+  | Site Manager            |  |
+       |                             |  | Site Observer (Cloud)   |  |
+       |                             |  +-------------------------+  |
+       |                             +-------------------------------+
+       |                                                       |
+       |                                                       |
++------+---------+       +-----+       +----------------+      |
+|     Users      |------>| CDN |<----->|    Storage     |      |
++------+---------+       +-----+       +----------------+      |
        |                                 |                     |
        |                                 v                     |
        |      +------------------------------------+           |
@@ -238,7 +244,11 @@ To support OBM delivery, compute-aware traffic steering must fulfil several requ
 | |  Site Controller  | Allocator  |
 +----------------------------------+
 ~~~~
-{: #fig1 title="Figure 1: AI4ME Network Architecture" artwork-align="center"}
+{: #fig2 title="Figure 2: AI4ME Resources" artwork-align="center"}
+
+In the figure above users are shown as interacting with a system that manages personalized media queues. Each user is associated with a dedicated queue that maintains a sequence of media objects tailored to their specific requirements. This approach allows for fine-grained control over content delivery, ensuring that media elements are customized in real-time. The Object Media Queue Manager is responsible for handling these personalized queues and forwarding processing requests to the appropriate compute resources. These components coordinate the retrieval and processing of media objects by distributing tasks across available resources. The Job Scheduler determines the order and priority of processing tasks, while the Resource Allocator assigns computational and storage resources to execute them. This scheduling mechanism is critical for balancing resource utilization, optimizing media rendering, and ensuring low-latency delivery.
+
+The Compute and Object Resource layer, which includes distributed compute nodes and storage elements responsible for processing media objects. The connections between the Job Scheduler, Resource Allocator, and compute nodes allow workloads to mapped to specific resources. The dynamic scheduling approach where different media objects are processed in parallel across multiple compute units, enhances scalability and efficiency, enabling personalized media delivery at scale. By integrating compute-aware resource scheduling with object-based media workflows, this architecture supports adaptive content distribution while optimizing network and compute resources.
 
 
 # Compute and Network Estimates
