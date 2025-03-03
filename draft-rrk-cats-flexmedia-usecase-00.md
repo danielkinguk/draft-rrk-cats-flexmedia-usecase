@@ -198,13 +198,13 @@ TBA
      |  |  Users |  | Devices|     |
      |  +--------+  +--------+     |
      +-----------------------------+
-
+~~~~
 {: #fig1 title="Figure 1: Flex Media Architecture" artwork-align="center"}
 
 The above figure provides a conceptulized architecture for Object-Based Media (OBM) processing and delivery, where media objects are dynamically assembled and personalized for individual users. Unlike traditional media streaming, which delivers a pre-encoded linear stream, OBM decomposes content into discrete media objects such as video segments, audio tracks, subtitles, and metadata. These objects are retrieved, processed, and compiled dynamically based on user preferences, user device capabilities (or distributed and dedicated compute nodes), and network conditions.
 
    {{fig2}} Flex Media Functional Components
-
+~~~~
                                      +-------------------------------+
                                      |   BBC Flex Media Orchestrator |
                                      |  +-------------------------+  |
