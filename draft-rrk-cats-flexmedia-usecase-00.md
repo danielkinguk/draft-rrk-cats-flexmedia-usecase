@@ -126,7 +126,7 @@ To be discussed in future versions of this document.
 
 To be discussed in future versions of this document. 
 
-## Previous IETF work on Video Media Delivery across Internet Infrastructure
+## Media Transport Protocols
 
 The Internet Engineering Task Force (IETF) has been involved in numerous initiatives and has developed various standards and protocols to improve and facilitate video media delivery across Internet infrastructure. 
 
@@ -147,9 +147,8 @@ TBA
 
 # Architecture for Flex Media
 
-   {{fig1}} Flex Media Architecture
-
 ~~~~
+
                   ((Users))
                       |
    +------------------+-----------------+
@@ -198,12 +197,13 @@ TBA
      |  |  Users |  | Devices|     |
      |  +--------+  +--------+     |
      +-----------------------------+
+     
 ~~~~
-{: #fig1 title="Figure 1: Flex Media Architecture" artwork-align="center"}
 
 The above figure provides a conceptulized architecture for Object-Based Media (OBM) processing and delivery, where media objects are dynamically assembled and personalized for individual users. Unlike traditional media streaming, which delivers a pre-encoded linear stream, OBM decomposes content into discrete media objects such as video segments, audio tracks, subtitles, and metadata. These objects are retrieved, processed, and compiled dynamically based on user preferences, user device capabilities (or distributed and dedicated compute nodes), and network conditions.
 
-   {{fig2}} Flex Media Functional Components
+
+
 ~~~~
                                      +-------------------------------+
                                      |   BBC Flex Media Orchestrator |
@@ -243,20 +243,20 @@ The above figure provides a conceptulized architecture for Object-Based Media (O
 | +--------------------------------|
 | |  Site Controller  | Allocator  |
 +----------------------------------+
-~~~~
-{: #fig2 title="Figure 2: AI4ME Resources" artwork-align="center"}
 
-In the figure above users are shown as interacting with a system that manages personalized media queues. Each user is associated with a dedicated queue that maintains a sequence of media objects tailored to their specific requirements. This approach allows for fine-grained control over content delivery, ensuring that media elements are customized in real-time. The Object Media Queue Manager is responsible for handling these personalized queues and forwarding processing requests to the appropriate compute resources. These components coordinate the retrieval and processing of media objects by distributing tasks across available resources. The Job Scheduler determines the order and priority of processing tasks, while the Resource Allocator assigns computational and storage resources to execute them. This scheduling mechanism is critical for balancing resource utilization, optimizing media rendering, and ensuring low-latency delivery.
+~~~~
+
+Users are shown as interacting with a system that manages personalized media queues. Each user is associated with a dedicated queue that maintains a sequence of media objects tailored to their specific requirements. This approach allows for fine-grained control over content delivery, ensuring that media elements are customized in real-time. The Object Media Queue Manager is responsible for handling these personalized queues and forwarding processing requests to the appropriate compute resources. These components coordinate the retrieval and processing of media objects by distributing tasks across available resources. The Job Scheduler determines the order and priority of processing tasks, while the Resource Allocator assigns computational and storage resources to execute them. This scheduling mechanism is critical for balancing resource utilization, optimizing media rendering, and ensuring low-latency delivery.
 
 The Compute and Object Resource layer, which includes distributed compute nodes and storage elements responsible for processing media objects. The connections between the Job Scheduler, Resource Allocator, and compute nodes allow workloads to mapped to specific resources. The dynamic scheduling approach where different media objects are processed in parallel across multiple compute units, enhances scalability and efficiency, enabling personalized media delivery at scale. By integrating compute-aware resource scheduling with object-based media workflows, this architecture supports adaptive content distribution while optimizing network and compute resources.
 
 
 # Compute and Network Estimates
 
-{{fig3}} Compute Estimates per Flex Media Service Type
+
+Compute Estimates: Narrative Versioning
 
 ~~~~
-Compute Estimates: Narrative Versioning
 
 +-----------------------------------------------------------+
 |Number of Users | Worst Case | Best Case (90% Cache Hits)  |
@@ -266,7 +266,11 @@ Compute Estimates: Narrative Versioning
 | 1,000,000 users| 4,500 nodes| 450 nodes                   |
 +----------------+------------+-----------------------------+
 
+~~~~
+
 Compute Estimates: Layered Compositing
+
+~~~~
 
 +------------------------------------------------------------+
 |Number of Users | Worst Case  | Best Case (90% Cache Hits)  |
@@ -276,7 +280,11 @@ Compute Estimates: Layered Compositing
 | 1,000,000 users| 11,100 nodes| 8,325 nodes                 |
 +----------------+-------------+-----------------------------+
 
+~~~~
+
 Compute Estimates: Rendered Objects
+
+~~~~
 
 +------------------------------------------------------------+
 |Number of Users | Worst Case  | Best Case (90% Cache Hits)  |
@@ -286,7 +294,11 @@ Compute Estimates: Rendered Objects
 | 1,000,000 users| 13,800 nodes| 10,400 nodes                |
 +----------------+-------------+-----------------------------+
 
+~~~~
+
 Compute Estimates: Non-Graphical
+
+~~~~
 
 +-----------------------------+
 |Number of Users | Worst Case |
@@ -295,31 +307,66 @@ Compute Estimates: Non-Graphical
 | 250,000 users  | 250 nodes  |
 | 1,000,000 users| 1,000 nodes|
 +----------------+------------+
-~~~~
-{: #fig3 title="Figure 3: Compute Estimates per Flex Media Service Type" artwork-align="center"}
-
-
-{{fig4}} Bandwidth Estimates per Flex Media Service Type
 
 ~~~~
+
+~~~~
+
 Bandwidth Requirements: User
 
-+------------------------------------------------------------------------------------------------------------------------------------+
-| Type                 | Number of Users | HD Bandwidth   Req. (Mbps)     | 4K Bandwidth Requirement (Mbps) | Total Bandwidth (Gbps)|
-+----------------------+----------------+---------------------------------+--------------------------------+-------------------------+
-| Narrative Versioning | 10,000         | 25,000 - 40,000                 | 75,000 - 125,000               | 100 - 165               |
-|                      | 250,000        | 625,000 - 1,000,000             | 1,875,000 - 3,125,000          | 2,500 - 4,125           |
-|                      | 1,000,000      | 2,500,000 - 4,000,000           | 7,500,000 - 12,500,000         | 10,000 - 16,500         |
-| Layered Compositing  | 10,000         | 25,000 - 40,000                 | 75,000 - 125,000               | 100 - 165               |
-|                      | 250,000        | 625,000 - 1,000,000             | 1,875,000 - 3,125,000          | 2,500 - 4,125           |
-|                      | 1,000,000      | 2,500,000 - 4,000,000           | 7,500,000 - 12,500,000         | 10,000 - 16,500         |
-| Rendered Objects     | 10,000         | 25,000 - 40,000                 | 75,000 - 125,000               | 100 - 165               |
-|                      | 250,000        | 625,000 - 1,000,000             | 1,875,000 - 3,125,000          | 2,500 - 4,125           |
-|                      | 1,000,000      | 2,500,000 - 4,000,000           | 7,500,000 - 12,500,000         | 10,000 - 16,500         |
-+------------------------------------------------------------------------------------------------------------------------------------+
++----------------------------------------------------------+
+| Type       | Number of Users | HD Bandwidth Req. (Mbps)  |
++------------+-----------------+---------------------------+
+| Narrative  | 10,000          | 25,000 - 40,000           |
+| Versioning | 250,000         | 625,000 - 1,000,000       |
+|            | 1,000,000       | 2,500,000 - 4,000,000     |
+| Layered    | 10,000          | 25,000 - 40,000           |
+| Compositing| 250,000         | 625,000 - 1,000,000       |
+|            | 1,000,000       | 2,500,000 - 4,000,000     |
+| Rendered   | 10,000          | 25,000 - 40,000           |
+| Objects    | 250,000         | 625,000 - 1,000,000       |
+|            | 1,000,000       | 2,500,000 - 4,000,000     |
++----------------------------------------------------------+
+
 ~~~~
 
-{: #fig4 title="Figure 4: Bandwidth Estimates per Flex Media Service Type" artwork-align="center"}
+
+~~~~
+
++----------------------------------------------------------+
+| Type       | Number of Users |  4K BW Requirement (Mbps) |
++------------+-----------------+---------------------------+
+| Narrative  | 10,000          | 75,000 - 125,000          |
+| Versioning | 250,000         | 625,000 - 1,000,000       |
+|            | 1,000,000       | 2,500,000 - 4,000,000     |
+| Layered    | 10,000          | 25,000 - 40,000           |
+| Compositing| 250,000         | 625,000 - 1,000,000       |
+|            | 1,000,000       | 2,500,000 - 4,000,000     |
+| Rendered   | 10,000          | 25,000 - 40,000           |
+| Objects    | 250,000         | 625,000 - 1,000,000       |
+|            | 1,000,000       | 2,500,000 - 4,000,000     |
++----------------------------------------------------------+
+
+~~~~
+
+~~~~
+
++--------------------------------------------------------------------+
+| Type                 | Number of Users | Total Bandwidth (Gbps)    |
++----------------------+-----------------+---------------------------+
+| Narrative Versioning | 10,000          | 100 - 165                 |
+|                      | 250,000         | 2,500 - 4,125             |
+|                      | 1,000,000       | 10,000 - 16,500           |
+| Layered Compositing  | 10,000          | 100 - 165                 |
+|                      | 250,000         | 2,500 - 4,125             |
+|                      | 1,000,000       | 10,000 - 16,500           |
+| Rendered Objects     | 10,000          | 100 - 165                 |
+|                      | 250,000         | 2,500 - 4,125             |
+|                      | 1,000,000       | 10,000 - 16,500           |
++--------------------------------------------------------------------+
+
+~~~~
+
 
 # Metrics
 
