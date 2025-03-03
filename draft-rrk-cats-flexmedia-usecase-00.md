@@ -382,14 +382,35 @@ These metrics refer to the cost of running offloaded media processing jobs at a 
 
 ## Compute Metrics
 
-Compute Type (CPU, GPU, Frequency, FLOPS, integer, FP8, 4 octets)
+These metrics are used to assess the suitability of compute resources and their availability for offloading of flex media compute tasks. They denote different types of compute hardware as well as their level of utilisation. GPUs will run tasks such as rendering complex images, where NPUs are preferred for repetitive and less complex AI tasks, such as background blurring or object detection.
+
+
+* Compute Type:  Type of processor (CPU, GPU, Frequency, FLOPS, integer, FP8, 4 octets)
+
+*  CPU: Frequency, number of cores, core utilization, memory bandwidth, memory size, 
+   memory utilization, power consumption. 
 
 *  GPU: Frequency, number of render units, memory bandwidth, memory
-  size, memory utilization, core utilization, power consumption.
+  size, memory utilization, core utilization, power consumption. For
 
-*  NPU: Computing power, utilization, power consumption.
+*  NPU: TOPS , utilization, power consumption 
+  
+*  System Load Average: A measure of the average workload of a system over a time period, providing a snapshot of overall system performance.
+
+*  Storage: Available space, read speed, write speed.
 
 ## Network Metrics
+
+These metrics enable the assessment the suitability ot network links based on their characteristics as they can adversely affect QoE.
+
+*	Latency: The time it takes for data to travel from source to destination is critical for the time-sensitive delivery of flex media. 
+*	Bandwidth: The maximum rate of data transfer across a network path, indicating the capacity of the network link.
+*	Packet Loss: The percentage of packets that fail to reach their destination, affecting the network connection quality.
+*	Jitter: The variability in packet delay can impact the performance of real-time applications like VoIP or video streaming.
+*	Throughput: The actual data transfer rate achieved can be lower than the available bandwidth due to various factors like congestion.
+*	Error Rates: The rate of erroneous packets, indicating the quality of the network link.
+
+
 
 # Scalability Considerations
 
