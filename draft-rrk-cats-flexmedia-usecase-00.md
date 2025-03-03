@@ -253,7 +253,7 @@ The Compute and Object Resource layer, which includes distributed compute nodes 
 
 # Compute and Network Estimates
 
-   {{fig2}} Compute Estimates
+{{fig3}} Compute Estimates per Flex Media Service Type
 
 ~~~~
 Compute Estimates: Narrative Versioning
@@ -295,9 +295,13 @@ Compute Estimates: Non-Graphical
 | 250,000 users  | 250 nodes  |
 | 1,000,000 users| 1,000 nodes|
 +----------------+------------+
+~~~~
+{: #fig3 title="Figure 3: Compute Estimates per Flex Media Service Type" artwork-align="center"}
 
-{: #fig1 title="Figure 2: Compute Estimates" artwork-align="center"}
 
+{{fig4} Bandwidth Estimates per Flex Media Service Type
+
+~~~~
 Bandwidth Requirements: User
 
 +------------------------------------------------------------------------------------------------------------------------------------+
@@ -314,6 +318,9 @@ Bandwidth Requirements: User
 |                      | 1,000,000      | 2,500,000 - 4,000,000           | 7,500,000 - 12,500,000         | 10,000 - 16,500         |
 +------------------------------------------------------------------------------------------------------------------------------------+
 ~~~~
+
+{: #fig3 title="Figure 4: Bandwidth Estimates per Flex Media Service Type" artwork-align="center"}
+
 
 # Metrics
 
