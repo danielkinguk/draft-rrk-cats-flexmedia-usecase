@@ -319,7 +319,7 @@ Bandwidth Requirements: User
 +------------------------------------------------------------------------------------------------------------------------------------+
 ~~~~
 
-{: #fig3 title="Figure 4: Bandwidth Estimates per Flex Media Service Type" artwork-align="center"}
+{: #fig4 title="Figure 4: Bandwidth Estimates per Flex Media Service Type" artwork-align="center"}
 
 # Metrics
 
