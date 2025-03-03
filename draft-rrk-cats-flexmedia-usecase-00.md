@@ -311,7 +311,7 @@ In traditional routing systems, often network path costs may not change frequent
 
 OBM requires the ability to dynamically assess compute availability and adjust media object delivery accordingly. Depending on the decision logic associated with OBM service delivery, one or more compute-related metrics must be conveyed within a CATS domain. The frequency of such conveyance must be optimised to ensure that signalling overhead does not introduce additional network congestion. While existing routing protocols can provide a baseline for conveying such metrics, alternative mechanisms may be required to efficiently integrate compute-aware decision-making processes.
 
-Furthermore, an effective OBM system should balance network path selection with the real-time availability of compute resources to ensure optimal QoE. This may involve leveraging distributed compute resources across the network, allowing OBM elements to be processed closer to the user when necessary. Mechanisms for synchronising compute-aware decisions across different network segments will be crucial to ensuring seamless media composition and delivery.
+Furthermore, an effective OBM system should balance network path selection with the real-time availability of compute resources to ensure optimal QoE. This may involve leveraging distributed compute resources across the network, matching computing workloads to resource-availability and allowing OBM elements to be processed closer to the user when necessary. Mechanisms for synchronising compute-aware decisions across different network segments will be crucial to ensuring seamless media composition and delivery.
 
 The categories of metrics relevant to OBM in a compute-aware traffic steering context include:
 
@@ -332,9 +332,62 @@ Distribution of OBM processing tasks between central cloud servers and edge comp
 
 ## Flex Media Metrics
 
+In addition to metrics for assessing compute suitability and availability, metrics are also required to select a particular compute site. This decision requires an undertanding of both the cost of offloading and its impact on Quality of Experience (QoE). For most flex media experiences, there are also baseline QoE constraints that need to be factored in this decision. 
+These metrics can be grouped in three main classes: 
+
+1. Delivery Performance
+This includes metrics associated with video delivery and media experience responsiveness , if the user is afforded agency via interaction:
+
+* Frame Rate: target frame rate for the experience (30 fps for video animations, sampling rate for audio);  also specifies the rate of work done required to produce the frames i.e. at frame rate 60 fps, twice the amount of computation is required compared to a 30 fps offloaded experience. 
+  
+* Frame Size: size of video frames (pixels) or audio samples (bit depth); usual Flex Media video resolutions are 720p, 1080p (HD) and 2160p (4K).
+
+* Bit Rate: amount of media data processed per second. Usually calculated as Frame Rate x Resolution (bps)
+
+* Delay: The end-to-end delay for streaming offloaded flex media consists of the following: 
+
+  * Render Delay: time to render each frame; this is dependent on the frame size, the number of objects to render and metrics indicating compute type (CPU, SIMD, GPU) and capabilities (frequency, boosted frequency, number of cores, number of render units, memory bandwidth, memory size, memory utilization, core utilization).
+  
+  * Encode Delay: time taken to encode and package frames for streaming. This depends on encoder type (hardware or software), encoding type (some are more optimised for low-latency) and media segment length.
+  
+  * Transport Delay: the network propagation delay for a media frame; depends on Frame Size and network bandwith
+  
+
+2. Client QoE
+
+These metrics concern the consumption of flex media and the perception of degradations by the user. Some metrics like delay/asynchrony tolerance are set by editorial guidelines. For example, there are different acceptable delays for interactive TV applications like switching media objects than for game-like or XR applications.  
+
+* Delay tolerance: The threshold for the particular experience beyond which the delay becomes perceptible/irritating to the user; usually editorially set as it may be experience-specific.
+
+* Object Asynchrony: the asynchrony between the various objects being assembled; offloading one or more objects processing may result in the objects arriving out of sync at the point of assembly due to network delay variation.
+    
+* Asynchrony Tolerance: the threshold beyond which the time shift between the objects becomes perceptible to the user. Lip-sync (between audio and video objects) has a lower asynchrony tolerance than Picture-in-Picture.
+
+* Object Quality: the average Frame Rate and the Frame Size of the media object; objects can be streamed at different qualities to meet bandwidth constraints based on user perception.
+   
+* Quality Switches (Magnitude, Frequency): if the media object is delivered via adaptive streaming, then this metric measures the frequency and magnitude of switches between available object qualities (e.g. resolution/bit rates).
+  
+* Number of Rebuffering Events: number of audio/video stalls over a time period due to network congestion or server performance delaying arrival of frames for decoding and playback.
+  
+* Playback Rate: the rates at which different objects are played at the point of assembly and presentation. These can vary if local playback adaptation algorithms are used to overcome object asynchrony. 
+
+
+3. Cost
+These metrics refer to the cost of running offloaded media processing jobs at a selected compute site and streaming the results back to the client.
+
+* Render Cost: this is determined from resources used (CPU/+GPU), the time taken to render, and time to encode a given task for transport.
+
+* Cache Recency: this specifies the (caching policy) i.e. the priority to be set for keeping a generated object frame in a cache . Utilisation of a cache reduces compute resource utilisation. An object with higher Cache Recency indicates a higher probability that this object will be required by another client in the lifetime of the experience.
+
 
 ## Compute Metrics
 
+Compute Type (CPU, GPU, Frequency, FLOPS, integer, FP8, 4 octets)
+
+*  GPU: Frequency, number of render units, memory bandwidth, memory
+  size, memory utilization, core utilization, power consumption.
+
+*  NPU: Computing power, utilization, power consumption.
 
 ## Network Metrics
 
