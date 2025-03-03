@@ -27,7 +27,7 @@ author:
 - 
   fullname: Rajiv Ramdhany
   organization: BBC
-  email: rajiv.Ramdhany@bbc.co.uk
+  email: rajiv.ramdhany@bbc.co.uk
 - 
   fullname: Nicholas Race
   organization: Lancaster University
@@ -57,6 +57,7 @@ It is important to use Internet bandwidth, especially at scale, efficiently; bro
 
 FM Content may be stored using Content Delivery Networks (CDNs), which are designed to efficiently distribute digital content—such as multimedia files and live streams—over IP networks to numerous endpoints and viewers. Typically, a CDN includes one or more servers responsible for delivering digital objects or streams. Additionally, it features a management or control system that handles various operations such as content distribution, request routing, reporting, metadata management, and other functionalities essential for the system's performance.
 
+Contemporary approaches to media delivery are challenging for FM content distribution. The flexibility in personalised media introduces a challenge of re-versioning, where the combinatorial explosion of potential content versions makes it impractical to pre-render and store all permutations. On-demand re-versioning can occur on the device if local processing capabilities and network bandwidth allow the objects to be transported to the device and composited. However, it is likely that media object composition may need to be offloaded upstream in the distribution pipeline for universal delivery.
 
 # Conventions and Definitions
 
@@ -92,7 +93,12 @@ An identifier representing a service, which the clients use to access it.
 
 A Flex Media (FM) service is personalised media such as stories, audiobooks, and games. This content is generated based on user preferences and experiential learning, ensuring a tailored experience. It employs multi-directional delivery methods, allowing user-generated content and personalised media to thrive. This "software-powered content" caters to end-users, the primary recipients and participants in this dynamic ecosystem.
 
-From a network distribution perspective, FM media requires a robust and flexible delivery infrastructure capable of handling the dynamic assembly of content based on user interactions and preferences. This necessitates advanced content delivery networks (CDNs) and edge computing solutions that efficiently process and deliver personalised content streams. Moreover, the scalability of this approach is critical, as it must support a potentially vast number of unique user experiences generated from the same set of media objects. By separating media components, creators can offer multiple versions of content tailored to different needs, such as alternative audio tracks for different languages or visually impaired audiences requiring descriptive audio. This level of adaptability not only enhances the user experience but also broadens the audience's reach.
+From a network distribution perspective, FM media requires a robust and flexible delivery infrastructure capable of handling the dynamic assembly of content based on user interactions and preferences. This necessitates advanced content delivery networks (CDNs) and edge computing solutions that efficiently process and deliver personalised content streams. Moreover, the scalability of this approach is critical, as it must support a potentially vast number of unique user experiences generated from the same set of media objects. By separating media components, creators can offer multiple versions of content tailored to different needs, such as alternative audio tracks for different languages or visually impaired audiences requiring descriptive audio. This level of adaptability not only enhances the user experience but also broadens the audience's reach. 
+
+Personalisation of media can occur in multiple stages if regional and personal preferences are considered. Delivery infrastructures for personalised media need therefore offer flexibility in creating dynamic media composition stages at at various locations in the network to efficiently support the various personalisation permutations. Further, the selection of media composition sites depends on the availability of compute resources, proximity to storage for media objects and if user agency is afforded, round-trip times to the destination Client.     
+
+
+
 
 ## Previous IETF work on Video Media Delivery across Internet Infrastructure
 
@@ -130,7 +136,7 @@ The dynamic nature of OBM necessitates advanced traffic steering mechanisms that
 
 ## Compute Aware Traffic Steering
 
-Deployment of OBM services introduces several technical challenges, particularly in the context of Compute Aware Traffic Steering (CATS). Real-time adaptation of compute resource usuage is a major challenge, as media objects must be dynamically composed and delivered based on changing network and compute conditions. Synchronisation across distributed compute nodes is also essential, ensuring coordinated media object delivery and processing across edge, cloud, and on-premise compute resources. As the process is managed an aditional challange of Quality of Experience (QoE) management, where compute resource usage must be balanced with perceived quality improvements to enhance the user experience, is also required.
+Deployment of OBM services introduces several technical challenges, particularly in the context of Compute Aware Traffic Steering (CATS). Real-time adaptation of compute resource usage is a major challenge, as media objects must be dynamically composed and delivered based on changing network and compute conditions. Synchronisation across distributed compute nodes is also essential, ensuring coordinated media object delivery and processing across edge, cloud, and on-premise compute resources. As the process is managed an additional challenge of Quality of Experience (QoE) management, where compute resource usage must be balanced with perceived quality improvements to enhance the user experience, is also required.  
 
 To support OBM delivery, compute-aware traffic steering must fulfil several requirements. It must possess dynamic compute resource awareness, allowing assessment and adaptation to available compute power along the delivery path. Multi-layer orchestration is necessary to coordinate network-layer traffic steering with application-layer OBM composition. Low-latency compute routing is crucial for minimising processing delays in interactive media experiences. Additionally, scalability and load balancing are needed to ensure efficient distribution of media object processing, preventing compute bottlenecks. Lastly, edge-aware optimisation should be integrated to leverage edge computing for latency-sensitive OBM applications.
 
@@ -305,7 +311,7 @@ In traditional routing systems, often network path costs may not change frequent
 
 OBM requires the ability to dynamically assess compute availability and adjust media object delivery accordingly. Depending on the decision logic associated with OBM service delivery, one or more compute-related metrics must be conveyed within a CATS domain. The frequency of such conveyance must be optimised to ensure that signalling overhead does not introduce additional network congestion. While existing routing protocols can provide a baseline for conveying such metrics, alternative mechanisms may be required to efficiently integrate compute-aware decision-making processes.
 
-Furthermore, an effective OBM system should balance network path selection with the real-time availability of compute resources to ensure optimal QoE. This may involve leveraging distributed compute resources across the network, allowing OBM elements to be processed closer to the user when necessary. Mechanisms for synchronising compute-aware decisions across different network segments will be crucial to ensuring seamless media composition and delivery.
+Furthermore, an effective OBM system should balance network path selection with the real-time availability of compute resources to ensure optimal QoE. This may involve leveraging distributed compute resources across the network, matching computing workloads to resource-availability and allowing OBM elements to be processed closer to the user when necessary. Mechanisms for synchronising compute-aware decisions across different network segments will be crucial to ensuring seamless media composition and delivery.
 
 The categories of metrics relevant to OBM in a compute-aware traffic steering context include:
 
@@ -326,11 +332,85 @@ Distribution of OBM processing tasks between central cloud servers and edge comp
 
 ## Flex Media Metrics
 
+In addition to metrics for assessing compute suitability and availability, metrics are also required to select a particular compute site. This decision requires an undertanding of both the cost of offloading and its impact on Quality of Experience (QoE). For most flex media experiences, there are also baseline QoE constraints that need to be factored in this decision. 
+These metrics can be grouped in three main classes: 
+
+1. Delivery Performance
+This includes metrics associated with video delivery and media experience responsiveness , if the user is afforded agency via interaction:
+
+* Frame Rate: target frame rate for the experience (30 fps for video animations, sampling rate for audio);  also specifies the rate of work done required to produce the frames i.e. at frame rate 60 fps, twice the amount of computation is required compared to a 30 fps offloaded experience. 
+  
+* Frame Size: size of video frames (pixels) or audio samples (bit depth); usual Flex Media video resolutions are 720p, 1080p (HD) and 2160p (4K).
+
+* Bit Rate: amount of media data processed per second. Usually calculated as Frame Rate x Resolution (bps)
+
+* Delay: The end-to-end delay for streaming offloaded flex media consists of the following: 
+
+  * Render Delay: time to render each frame; this is dependent on the frame size, the number of objects to render and metrics indicating compute type (CPU, SIMD, GPU) and capabilities (frequency, boosted frequency, number of cores, number of render units, memory bandwidth, memory size, memory utilization, core utilization).
+  
+  * Encode Delay: time taken to encode and package frames for streaming. This depends on encoder type (hardware or software), encoding type (some are more optimised for low-latency) and media segment length.
+  
+  * Transport Delay: the network propagation delay for a media frame; depends on Frame Size and network bandwith
+  
+
+2. Client QoE
+
+These metrics concern the consumption of flex media and the perception of degradations by the user. Some metrics like delay/asynchrony tolerance are set by editorial guidelines. For example, there are different acceptable delays for interactive TV applications like switching media objects than for game-like or XR applications.  
+
+* Delay tolerance: The threshold for the particular experience beyond which the delay becomes perceptible/irritating to the user; usually editorially set as it may be experience-specific.
+
+* Object Asynchrony: the asynchrony between the various objects being assembled; offloading one or more objects processing may result in the objects arriving out of sync at the point of assembly due to network delay variation.
+    
+* Asynchrony Tolerance: the threshold beyond which the time shift between the objects becomes perceptible to the user. Lip-sync (between audio and video objects) has a lower asynchrony tolerance than Picture-in-Picture.
+
+* Object Quality: the average Frame Rate and the Frame Size of the media object; objects can be streamed at different qualities to meet bandwidth constraints based on user perception.
+   
+* Quality Switches (Magnitude, Frequency): if the media object is delivered via adaptive streaming, then this metric measures the frequency and magnitude of switches between available object qualities (e.g. resolution/bit rates).
+  
+* Number of Rebuffering Events: number of audio/video stalls over a time period due to network congestion or server performance delaying arrival of frames for decoding and playback.
+  
+* Playback Rate: the rates at which different objects are played at the point of assembly and presentation. These can vary if local playback adaptation algorithms are used to overcome object asynchrony. 
+
+
+3. Cost
+These metrics refer to the cost of running offloaded media processing jobs at a selected compute site and streaming the results back to the client.
+
+* Render Cost: this is determined from resources used (CPU/+GPU), the time taken to render, and time to encode a given task for transport.
+
+* Cache Recency: this specifies the (caching policy) i.e. the priority to be set for keeping a generated object frame in a cache . Utilisation of a cache reduces compute resource utilisation. An object with higher Cache Recency indicates a higher probability that this object will be required by another client in the lifetime of the experience.
+
 
 ## Compute Metrics
 
+These metrics are used to assess the suitability of compute resources and their availability for offloading of flex media compute tasks. They denote different types of compute hardware as well as their level of utilisation. GPUs will run tasks such as rendering complex images, where NPUs are preferred for repetitive and less complex AI tasks, such as background blurring or object detection.
+
+
+* Compute Type:  Type of processor (CPU, GPU, Frequency, FLOPS, integer, FP8, 4 octets)
+
+*  CPU: Frequency, number of cores, core utilization, memory bandwidth, memory size, 
+   memory utilization, power consumption. 
+
+*  GPU: Frequency, number of render units, memory bandwidth, memory
+  size, memory utilization, core utilization, power consumption. For
+
+*  NPU: TOPS , utilization, power consumption 
+  
+*  System Load Average: A measure of the average workload of a system over a time period, providing a snapshot of overall system performance.
+
+*  Storage: Available space, read speed, write speed.
 
 ## Network Metrics
+
+These metrics enable the assessment the suitability ot network links based on their characteristics as they can adversely affect QoE.
+
+*	Latency: The time it takes for data to travel from source to destination is critical for the time-sensitive delivery of flex media. 
+*	Bandwidth: The maximum rate of data transfer across a network path, indicating the capacity of the network link.
+*	Packet Loss: The percentage of packets that fail to reach their destination, affecting the network connection quality.
+*	Jitter: The variability in packet delay can impact the performance of real-time applications like VoIP or video streaming.
+*	Throughput: The actual data transfer rate achieved can be lower than the available bandwidth due to various factors like congestion.
+*	Error Rates: The rate of erroneous packets, indicating the quality of the network link.
+
+
 
 # Scalability Considerations
 
